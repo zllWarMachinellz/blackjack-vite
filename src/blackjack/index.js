@@ -1,5 +1,6 @@
 import _ from 'underscore'
 import { crearDeck as createNewDeck } from './usecases/create-deck';
+import { pedirCarta } from './usecases/request-card';
 
 /**
  * 2C = Two of Clubs
@@ -29,16 +30,6 @@ const puntosHTML = document.querySelectorAll('small');
 
 deck = createNewDeck (tipos, especiales);
 
-
-// Esta función me permite tomar una carta
-const pedirCarta = () => {
-
-    if (deck.length === 0) {
-        throw 'No hay cartas en el deck';
-    }
-    const carta = deck.pop();
-    return carta;
-}
 
 // pedirCarta();
 const valorCarta = (carta) => {
@@ -88,7 +79,7 @@ const turnoComputadora = (puntosMinimos) => {
 // Eventos
 btnPedir.addEventListener('click', () => {
 
-    const carta = pedirCarta();
+    const carta = pedirCarta(deck);
 
     puntosJugador = puntosJugador + valorCarta(carta);
     puntosHTML[0].innerText = puntosJugador;
